@@ -1,0 +1,13 @@
+defaults: &defaults
+  adapter: mysql
+  username: root
+  password: 
+  host: localhost
+
+development:
+  <<: *defaults
+  database: twittertimeline
+
+test:
+  <<: *defaults
+  database: twittertimeline
