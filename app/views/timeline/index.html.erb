@@ -1,0 +1,25 @@
+<div class="initial">
+	<h1>Welcome to the Twitter Timeline!</h1>
+	<p>You can write up to 3 Twitter usernames to check their recent updates.</p>
+	<%= form_for :tweets, :url => tweets_path, :html => {:id => "tweets_form", :method => :get}  do |f| %>
+		<%= f.text_field "user1" %>
+		<%= f.text_field "user2" %>
+		<%= f.text_field "user3" %>
+		<%= f.hidden_field "last_id1" %>
+		<%= f.hidden_field "last_id2" %>
+		<%= f.hidden_field "last_id3" %>		
+		<%= f.submit( "Get tweets!") %>
+	<% end %>
+</div>
+<div id="messages">
+	
+</div>
+<div class="timeline hidden">
+	<h1>This is the timeline for: <span></span></h1>
+	<%= link_to "Load new tweets", "javascript:void(0);", :id => "load_new" %>
+	<%= link_to "Search for other users", "javascript:void(0);", :id => "other_users" %>
+	
+	<div id="tweets_list">
+
+	</div>	
+</div>

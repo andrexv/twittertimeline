@@ -1,11 +1,19 @@
 source 'http://rubygems.org'
+source 'http://gemcutter.org'
 
 gem 'rails', '3.0.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql'
+gem 'jquery-rails', '1.0.19'
+gem 'twitter', '2.1.1'
+
+group :development, :test do
+  gem 'vcr'
+  gem 'rspec-rails'
+  gem 'fakeweb-matcher'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'

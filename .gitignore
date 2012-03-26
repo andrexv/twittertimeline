@@ -23,4 +23,4 @@ webrat-*
 !.keep  
 *.svn
 .svn    
-
+.rspec
