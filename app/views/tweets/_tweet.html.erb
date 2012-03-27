@@ -1,19 +1,9 @@
 <div class="tweet">
-	<div class="user_image">
-		<%= image_tag(tweet.user.profile_image_url_https) %>	
-	</div>
-	<br/>
-	
-	<div class="tweet_info">
-		<h3> <%= tweet.user.name %> </h3>
-		<br/>
-		
-		<p> <%= tweet.text %> </p>
-		<br/>
-		
-		<small> <%= tweet.created_at %> </small>
-		<br/>
-		<br/>
-		
-	</div>
+	<blockquote>
+		<div class="tweet_img">
+			<%= image_tag(tweet.user.profile_image_url_https) %>	
+		</div>
+	  <p><%= tweet.text %> </p>
+	  <small>By <%= tweet.user.name %> <%= time_ago_in_words(tweet.created_at) %> ago.</small>
+	</blockquote>
 </div>

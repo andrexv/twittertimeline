@@ -1,3 +1,18 @@
+body{
+	background-color: #C0DEED;
+	background-position:left 40px;
+	background-image: url('/images/bg.png');
+	background-repeat:no-repeat;	
+}
 .hidden{
 	display:none;
+}
+.tweet .tweet_img {
+	float: left;
+	padding-right: 15px;
+}
+.tweet  blockquote{
+	border-left:none;
+	border-bottom:1px solid #EEE;
+	height:75px;
 }

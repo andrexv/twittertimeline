@@ -3,20 +3,30 @@ $(document).ready(function(){
 });
 
 function tweets () {
+	$(".container-fluid .alert").hide();
+	$('.progress').hide();
+	$(".timeline").hide();
 	$("#tweets_submit").click(function(){
+		$('.progress').show();
 		load_tweets();
 		return false;
-	})
+	});
 	$("#load_new").click(function(){
+		$('.progress').show();
 		load_tweets();
 		return false;
-	})
+	});
 	$("#other_users").click(function(){
-		$("input[type=text]").val("")
-		$(".initial").removeClass("hidden");
-		$(".timeline").addClass("hidden")
-		$(".timeline h1 span").html(json.valid_users)
+		$("input[type=text], input[type=hidden]").val("");
+		$(".initial").show();
+		$(".timeline").hide();
+		$(".timeline h1 span").html("");
+		$("#tweets_list").html("");
+		
 		return false;
+	});
+	$(".close").click(function () {
+		manageFlashes("hidden", "")
 	})
 }
 
@@ -25,27 +35,42 @@ function load_tweets() {
 	  url: '/tweets',
 	  async:false,
 	  data: $("#tweets_form").serialize(),
-	  dataType: "JSON",				
+	  dataType: "JSON",		
+	  complete: function(){
+			$('.progress').fadeOut("slow");
+	  },		
 	  success: function (json) {
 		if (json.valid_users !=""){
-			$("#messages").html("")
+			manageFlashes("hidden", "")
 			if (json.tweets_list != "")
 				$("#tweets_list").prepend(json.tweets_list);
 			else{
-				$("#messages").html("There are not new tweets to pull.").addClass("error")
+				manageFlashes("alert-info","There are not new tweets to pull.");
 			}
-			$("#tweets_last_id1").val(json.last_ids[0])
-			$("#tweets_last_id2").val(json.last_ids[1])
-			$("#tweets_last_id3").val(json.last_ids[2])
-			$(".initial").addClass("hidden");
-			$(".timeline").removeClass("hidden")
-			$(".timeline h1 span").html(json.valid_users)
+			$("#tweets_last_id1").val(json.last_ids[0]);
+			$("#tweets_last_id2").val(json.last_ids[1]);
+			$("#tweets_last_id3").val(json.last_ids[2]);
+			$(".initial").hide();
+			$(".timeline").show();
+			$(".timeline h1 span").html(json.valid_users);
 			if (json.error){
-				$("#messages").html("Please, check the usernames given. Some of them were not found.").addClass("error")
+				manageFlashes("alert-info","Please, check the usernames given. Some of them were not found.");
 			}
 		}else{
-			$("#messages").html("Please, add at least one valid username.").addClass("error")		
+			manageFlashes("alert-error","Please, write at least one valid username.");
 		}
 	  },
 	});
+}
+
+function manageFlashes(type, message){
+	if (type == "hidden"){
+		$(".container-fluid .alert").slideUp("fast",function () {
+			$(this).removeClass("alert-error").removeClass("alert-info").removeClass("alert-success");
+		})
+		$(".container-fluid .alert span").html("");
+	}else{
+		$(".container-fluid .alert").addClass(type).slideDown("fast")
+		$(".container-fluid .alert span").html(message);
+	}
 }
