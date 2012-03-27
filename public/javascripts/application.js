@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 function tweets () {
-	$(".container-fluid .alert").hide();
+	$(".container .alert").hide();
 	$('.progress').hide();
 	$(".timeline").hide();
 	$("#tweets_submit").click(function(){
@@ -65,12 +65,12 @@ function load_tweets() {
 
 function manageFlashes(type, message){
 	if (type == "hidden"){
-		$(".container-fluid .alert").slideUp("fast",function () {
+		$(".container .alert").slideUp("fast",function () {
 			$(this).removeClass("alert-error").removeClass("alert-info").removeClass("alert-success");
 		})
-		$(".container-fluid .alert span").html("");
+		$(".container .alert span").html("");
 	}else{
-		$(".container-fluid .alert").addClass(type).slideDown("fast")
-		$(".container-fluid .alert span").html(message);
+		$(".container .alert").addClass(type).slideDown("fast")
+		$(".container .alert span").html(message);
 	}
 }
